@@ -3,7 +3,8 @@ Project 0x00. SSH key consitsts of generating an SSH key, with sharing of ssh pu
 
 ## Creation Process 
 1. Generating my SSH key using 
-``` ssh-keygen -t rsa 
+``` 
+ssh-keygen -t rsa 
 ```
 2. Filling the SSH public key field in my intranet profile
 3. Creating this repo
