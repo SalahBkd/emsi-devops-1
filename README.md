@@ -1,2 +1,2 @@
 # emsi-devops
-This repo accommodate all my Hoberon projects.
+This repo accommodate all my Holberon projects.
