@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+#this script creates an ssh key named holberton with 4096bits
 ssh-keygen -f holberton -t rsa -b 4096 -N betty
 

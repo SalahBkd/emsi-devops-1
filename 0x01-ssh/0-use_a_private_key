@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-ssh ubuntu@34.73.106.157
+#this script uses ssh to connect me to my server using ~/.ssh/holberton private key
+ssh -i ~/.ssh/holberton ubuntu@34.73.106.157
 
