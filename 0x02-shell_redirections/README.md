@@ -5,3 +5,4 @@
 2. **1-confused_smiley** :prints out a confused smiley "(Ôo)'. 
 3. **2-hellofile** : prints out the content of /etc/passwd 
 4. **3-twofiles** : prints out the content of /etc/passwd and /etc/hosts
+5. **4-lastlines** : prints out the last 10 line of /etc/passwd file
