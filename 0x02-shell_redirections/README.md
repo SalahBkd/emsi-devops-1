@@ -7,3 +7,4 @@
 4. **3-twofiles** : prints out the content of /etc/passwd and /etc/hosts
 5. **4-lastlines** : prints out the last 10 line of /etc/passwd file
 6. **5-firstlines** : prints out the first 10 line of /etc/passwd file
+7. **6-third_line** : prints out the third line of /iacta file 
