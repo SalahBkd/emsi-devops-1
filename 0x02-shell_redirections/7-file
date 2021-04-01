@@ -1,4 +1,2 @@
 #!/bin/bash
-touch "\*\\\'\"Holberton School\"\'\\*$\?\*\*\*\*\*:)"$'\n'"Holberton School"
-
-
+touch "$(echo -e "\*\\\'\"Holberton School\"\'\\*$\?\*\*\*\*\*:)\nHolberton School")"
