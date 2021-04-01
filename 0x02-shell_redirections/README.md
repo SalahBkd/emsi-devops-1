@@ -8,3 +8,4 @@
 5. **4-lastlines** : prints out the last 10 line of /etc/passwd file
 6. **5-firstlines** : prints out the first 10 line of /etc/passwd file
 7. **6-third_line** : prints out the third line of /iacta file 
+8. **7-file** : creates a new file with this exact name "\*\\'"Holberton School"\'\\*$\?\*\*\*\*\*:)"
