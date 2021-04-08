@@ -1,0 +1,4 @@
+#!/usr/bin/env bash 
+# configuring a new ubuntu machine to respect requirements 
+sudo apt-get install nginx 
+
