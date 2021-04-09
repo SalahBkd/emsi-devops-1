@@ -3,8 +3,6 @@
 $MYGITHUB="\\\tlocation /redirect_me {\n\t\t return 301 https://github.com/OussamaAlaoui;\n\t}\n"
 apt-get update
 apt-get -y install nginx
-sed -i '0,/listen .*/s//listen 80 default_server;/' /etc/nginx/sites-available/default
-echo Holberton School > /var/www/html/index.nginx-debian.htmli
 echo "This is a file for our redirection project." > /usr/share/nginx/html/index.html
 sed -i '49i $MYGITHUB' /etc/nginx/sites-available/default
 service nginx restart
