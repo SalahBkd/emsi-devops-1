@@ -5,4 +5,6 @@ apt-get update
 apt-get -y install nginx
 echo "This is a file for our redirection project." | tee /usr/share/nginx/html/index.html
 sed -i '30i $MYGITHUB' /etc/nginx/sites-available/default
+sudo service nginx start
+sudo nginx -t
 service nginx restart
