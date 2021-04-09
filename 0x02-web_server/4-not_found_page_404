@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# returning a special 404 Error
+CUSTOM_404="\\\tlocation /error {\n\t\t return 404 ERROR404.html;\n\t}\n"
+apt-get update
+apt-get -y install nginx
+sed -i '0,/listen .*/s//listen 80 default_server;/' /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /var/www/html/ERROR404.html
+sed -i "55i $CUSTOM_404" /etc/nginx/sites-available/default
+service nginx restart
