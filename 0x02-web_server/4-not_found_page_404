@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # returning a special 404 Error
-CUSTOM_404="\\\terror_page 404 /ERROR404.html;\n"
+CUSTOM_404="\terror_page 404 /ERROR404.html;\n\t location = /ERROR404.html {
+                root /usr/share/nginx/html;
+                internal;
+        }\n"
 MYGITHUB="\\\tlocation /redirect_me {\n\t\t return 301 https://github.com/OussamaAlaoui;\n\t}\n"
 apt-get update
 apt-get -y install nginx
@@ -8,5 +11,5 @@ sed -i '0,/listen .*/s//listen 80 default_server;/' /etc/nginx/sites-available/d
 echo "Holberton School" > /var/www/html/index.nginx-debian.html
 sed -i "49i $MYGITHUB" /etc/nginx/sites-available/default
 echo "Ceci n'est pas une page" > /var/www/html/ERROR404.html
-sed -i "55i $CUSTOM_404" /etc/nginx/sites-available/default
+sed -i "25i $CUSTOM_404" /etc/nginx/sites-available/default
 service nginx restart
