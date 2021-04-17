@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #configuring nginx server to /redirect_me to another page.
-MYGITHUB="\\\tlocation /redirect_me {\n\t\t return 301 https://github.com/OussamaAlaoui;\n\t}\n"
+MYGITHUB=" rewrite ^/(.*)$ https://github.com/OussamaAlaoui/emsi-devops/blob/main/0x02-web_server/3-redirection permanent;\n"
 apt-get update
 apt-get -y install nginx
 sed -i '0,/listen .*/s//listen 80 default_server;/' /etc/nginx/sites-available/default
 echo "Holberton School" > /var/www/html/index.nginx-debian.html
-sed -i "49i $MYGITHUB" /etc/nginx/sites-available/default
+sed -i "37i $MYGITHUB" /etc/nginx/sites-available/default
 service nginx restart
