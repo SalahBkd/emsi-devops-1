@@ -6,7 +6,7 @@ ROUNDALGO="backend web_servers \n
         \tserver web-02 35.185.51.133:80 check\n
         \tserver web-01 34.73.106.157:80 check\n"
 apt-get update 
-apt-get -y install 
+apt-get -y install haproxy 
 echo "ENABLED=1" >> /etc/default/haproxy
 echo $ROUNDALGO >> /etc/haproxy/haproxy.cfg
 service haproxy restart
