@@ -1,0 +1,7 @@
+#!/usr/bin/env bash 
+# print HOLBERTON SCHOOL 10 times using until loop 
+i=0
+until [ $i -eq 9 ]
+do 
+echo "Holberton School"
+done
