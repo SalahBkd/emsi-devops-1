@@ -2,18 +2,18 @@
 # clock
 h=0
 m=0
-while [ $h -le 12 ]; do 
+while [ $h -le 13 ]; do 
 if [[ $h -eq 0 ]]; then 
 echo "Hour: $h"
 ((h=h+1))
 elif [[ $m -ne 59 ]]; then
 ((m=m+1))
 echo $m 
-else  
+else
+if [[ $h -lt 13 ]]; then
+echo "Hour: $h"
+fi  
 ((h=h+1))
 ((m=0))
-if [[ $h -lt 13 ]]; then 
-echo "Hour: $h"
-fi
 fi 
 done 
