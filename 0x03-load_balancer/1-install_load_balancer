@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 #installing and configuring haproxy with roundrobin algorithm
-ROUNDALGO="backend web_servers \n
-        \tmode http\n
-	\tbalance roundrobin\n
-        \tserver web-02 35.185.51.133:80 check\n
-        \tserver web-01 34.73.106.157:80 check\n"
+ROUNDALGO="backend web_servers\n
+	\tmode http\n \tbalance roundrobin\n
+	\tserver web-02 35.185.51.133:80 check\n
+	\tserver web-01 34.73.106.157:80 check\n"
+
 apt-get update 
 apt-get -y install haproxy 
 echo "ENABLED=1" >> /etc/default/haproxy
-echo $ROUNDALGO >> /etc/haproxy/haproxy.cfg
+echo -e $ROUNDALGO >> /etc/haproxy/haproxy.cfg
 service haproxy restart
 
