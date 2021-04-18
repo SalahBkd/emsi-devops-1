@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #installing and configuring haproxy with roundrobin algorithm
-ROUDALGO="backend web_servers \n
+ROUNDALGO="backend web_servers \n
         \tmode http\n
 	\tbalance roundrobin\n
         \tserver web-02 35.185.51.133:80 check\n
