@@ -1,0 +1,5 @@
+#!/usr/bin/env bash 
+# looping through files in the current direcotry
+for FILE in *; do
+echo $FILE | cut -d '-' -f 2
+done 

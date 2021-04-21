@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# clock
+# clock that displays the time hours from 0-12 and minutes from 1-59
 h=0
 m=0
 while [ $h -le 13 ]; do 
@@ -16,4 +16,5 @@ fi
 ((h=h+1))
 ((m=0))
 fi 
-done 
+done
+ 
