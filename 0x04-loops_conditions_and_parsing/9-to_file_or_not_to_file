@@ -1,9 +1,10 @@
 #!/usr/bin/env bash 
 #testing if a file exists or not 
 FILE="holbertonschool"
-if test -f "$FILE"; then 
+if test -e "$FILE"; then 
     echo "holbertonschool file exists"
-    echo "holbertonschool is a regular file"
+    if test -f "$FILE";then
+        echo "holbertonschool is a regular file"
     if [[ -s $FILE ]]; then 
         echo "holbertonschool file is not empty"
     else 
