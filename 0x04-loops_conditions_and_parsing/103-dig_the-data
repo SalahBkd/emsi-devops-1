@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # display occurrences, ip adress and HTTP status 
-awk '{print $10,$1,$9}' apache-access.log | sort -nr
+awk '{print $1,$9}' apache-access.log | uniq -c | sort -nr
+
