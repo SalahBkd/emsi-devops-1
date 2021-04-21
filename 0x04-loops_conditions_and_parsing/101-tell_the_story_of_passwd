@@ -10,6 +10,6 @@ while read line; do
     ID=$( echo "$line" | cut -d: -f3)
     PASS=$( echo "$line" | cut -d: -f2)
     
-    echo "The user $USERN is part of the $GROUP_ID gang, lives in $HOME_DIRECTORY and rides $SHELLL. USER $ID's place is protected by the passcode $PASS, more info about the user here: $USERN"
+    echo "The user $USERN is part of the $GROUP_ID gang, lives in $HOME_DIRECTORY and rides $SHELLL. $ID's place is protected by the passcode $PASS, more info about the user here: $USERN"
     fi
 done < /etc/passwd
