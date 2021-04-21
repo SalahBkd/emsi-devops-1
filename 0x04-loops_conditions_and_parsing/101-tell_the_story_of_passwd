@@ -1,0 +1,15 @@
+#!/usr/bin/env bash 
+# print etc/passwd content using IFS 
+while read line; do
+    if [[ ! ${line:0:1} == '#' ]]
+    then
+    USERN=$(echo "$line" | cut -d: -f1)
+    GROUP_ID=$(echo "$line" | cut -d: -f4)
+    HOME_DIRECTORY=$(echo "$line" | cut -d: -f6)
+    SHELLL=$( echo "$line" | cut -d: -f7)
+    ID=$( echo "$line" | cut -d: -f3)
+    PASS=$( echo "$line" | cut -d: -f2)
+    
+    echo "The user $USERN is part of the $GROUP_ID gang, lives in $HOME_DIRECTORY and rides $SHELLL. USER $ID's place is protected by the passcode $PASS, more info about the user here: $USERN"
+    fi
+done < /etc/passwd
