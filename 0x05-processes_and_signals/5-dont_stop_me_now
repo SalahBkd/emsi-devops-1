@@ -1,3 +1,4 @@
 #!/usr/bin/env bash 
 # killing the process of the script 4
-kill -9 23261
+PID= pgrep bash
+kill $PID
