@@ -1,0 +1,3 @@
+#!/usr/bin/env bash 
+# displaying all currently running processes of all users 
+ps auxf
