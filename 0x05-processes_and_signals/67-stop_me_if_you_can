@@ -1,0 +1,3 @@
+#!/usr/bin/env bash 
+#killing the script 5 process without using kill or killall
+pkill bash  
