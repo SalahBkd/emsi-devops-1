@@ -1,27 +1,31 @@
 #!/usr/bin/env bash 
 # this script manages the manage_my_process
-start () {
+startt() {
 ./manage_my_process &
 echo "$!" > /var/run/holbertonscript.pid
 }
-stop () {
+stopp() {
 pkill -f "./manage_my_process"
-sudo rm /var/run/holbertonscript.pid
+rm /var/run/holbertonscript.pid
 }
-restart () {
-stop
-start
+restartt() {
+stopp
+startt
 echo "manage_my_process restarted"
 }
-
-if test "$1" == "start";then 
-start
-echo "manage_my_process started"
-elif test "$1" == "stop";then 
-stop
-echo "manage_my_process stopped"
-elif test "$1" == "restart"; then 
-restart
-else 
-echo "Usage: manage_my_process {start|stop|restart}"
-fi
+case "$1" in 
+	start)
+	echo "manage_my_process started"
+	startt
+	;;
+	stop)
+	echo "manage_my_process stopped"
+	stopp
+	;;
+	restart)
+	restartt
+	;;
+	*) 
+	echo "Usage: manage_my_process {start|stop|restart}"
+	;;
+esac
