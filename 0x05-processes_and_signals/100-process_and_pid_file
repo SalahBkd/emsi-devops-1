@@ -1,11 +1,12 @@
 #!/usr/bin/env bash 
 # reacring to different types of signes
 echo $$ > /var/run/holbertonscript.pid
-cat /var/run/holbertonscript.pid
-while :
-do 
-echo "To infinity and beyond"
 trap "echo 'Y U no love me?!'" SIGINT
 trap "rm /var/run/holbertonscript.pid; echo 'I hate the kill command'; exit" SIGQUIT SIGTERM
+
+while :
+do
+sleep 2 
+echo "To infinity and beyond"
 done 
 
