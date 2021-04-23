@@ -6,7 +6,7 @@ echo "$!" > /var/run/holbertonscript.pid
 }
 stop () {
 pkill -f "./manage_my_process"
-rm /var/run/holbertonscript.pid
+sudo rm /var/run/holbertonscript.pid
 }
 restart () {
 stop
