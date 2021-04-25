@@ -1,0 +1,15 @@
+#!/usr/bin/env bash 
+#configuring domain zone and ignoring shellcheck SC2086
+
+sub()
+{
+if [ "$#" -eq 1 ]; then 
+dig www.$1 | grep -A1 'ANSWER SECTION:' | tr '\n' ' ' | awk '{split($0,arr," "); printf "The subdomain www is a %s record and points to %s \n",arr[7],arr[8]}'
+dig lb-01.$1 | grep -A1 'ANSWER SECTION:' | tr '\n' ' ' | awk '{split($0,arr," "); printf "The subdomain lb-01 is a %s record and points to %s \n",arr[7],arr[8]}'
+dig web-01.$1 | grep -A1 'ANSWER SECTION:' | tr '\n' ' ' | awk '{split($0,arr," "); printf "The subdomain web-01 is a %s record and points to %s \n",arr[7],arr[8]}'
+dig web-02.$1 | grep -A1 'ANSWER SECTION:' | tr '\n' ' ' | awk '{split($0,arr," "); printf "The subdomain web-02 is a %s record and points to %s \n",arr[7],arr[8]}' 
+elif [ "$#" -eq 2 ]; then 
+dig $2.$1 | grep -A1  'ANSWER SECTION:' | tr '\n' ' ' | awk '{split($0,arr[4],arr2," "); printf "The subdomain %s is a %s record and points to %s \n",arr2[1],arr[7],arr[8]}'
+fi
+}
+
