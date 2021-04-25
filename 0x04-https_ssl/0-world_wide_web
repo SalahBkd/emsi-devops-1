@@ -1,20 +1,17 @@
 #!/usr/bin/env bash 
 #configuring domain zone and ignoring shellcheck SC2086
 
-CONF_DOMAIN () {
-echo "void"
+disp ()
+{
+    DOMAIN="$1"
+    SUBDOMAIN="$2"
+    dig "$SUBDOMAIN.$DOMAIN" | awk '/ANSWER SECTION:/{getline; printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' var="$SUBDOMAIN"
 }
-if [ $# -eq 1 ]; then 
-   for SUBDOMAIN in 'www' 'lb-01' 'web-01' 'web-02'
-    do
-        URL="$SUBDOMAIN.$1"
-        IPADD=$(dig "$URL" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $5}')
-        TYPE=$(dig "$URL" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $4}')
-        echo "The subdomain $SUBDOMAIN is a $TYPE record and points to $IPADD"
-    done
-elif [ $# -eq 2 ]; then 
-    URL="$2.$1"
-    IPADD=$(dig "$URL" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $5}')
-    TYPE=$(dig "$URL" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $4}')
-    echo "The subdomain $2 is a $RECORDTYPE record and points to $IPADD"
-fi
+
+for SUBDOMAIN in "www" "lb-01" "web-01" "web-02"
+do
+    if [ -z "$2" ] || [ "$2" == "$SUBDOMAIN" ] ;
+    then
+	disp "$1" "$SUBDOMAIN"
+    fi
+done
