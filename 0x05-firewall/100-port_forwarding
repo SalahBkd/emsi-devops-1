@@ -1,0 +1,1056 @@
+
+# allow all on loopback
+-A ufw-before-input -i lo -j ACCEPT
+-A ufw-before-output -o lo -j ACCEPT
+
+# quickly process packets for which we already have a connection
+-A ufw-before-input -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-output -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-forward -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# drop INVALID packets (logs these in loglevel medium and higher)
+-A ufw-before-input -m conntrack --ctstate INVALID -j ufw-logging-deny
+-A ufw-before-input -m conntrack --ctstate INVALID -j DROP
+
+# ok icmp codes for INPUT
+-A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type echo-request -j ACCEPT
+
+# ok icmp code for FORWARD
+-A ufw-before-forward -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type echo-request -j ACCEPT
+
+# allow dhcp client to work
+-A ufw-before-input -p udp --sport 67 --dport 68 -j ACCEPT
+
+#
+# ufw-not-local
+#
+-A ufw-before-input -j ufw-not-local
+
+# if LOCAL, RETURN
+-A ufw-not-local -m addrtype --dst-type LOCAL -j RETURN
+"before.rules" 81L, 2765C                                                                     1,1           Top
+#
+depmod.d                       kernel-img.conf  opt             security
+ubuntu@gc-3118-web-01-1616627477:/etc$ cd ufw
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ ls
+after.init   after6.rules    before.init   before6.rules  ufw.conf    user6.rules
+after.rules  applications.d  before.rules  sysctl.conf    user.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ vim before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo vim before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw disable
+Firewall stopped and disabled on system startup
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw enable
+#
+# rules.before
+#
+# Rules that should be run before the ufw command line added rules. Custom
+# rules should be added to one of these chains:
+#   ufw-before-input
+#   ufw-before-output
+#   ufw-before-forward
+#
+
+# Don't delete these required lines, otherwise there will be errors
+*filter
+:ufw-before-input - [0:0]
+:ufw-before-output - [0:0]
+:ufw-before-forward - [0:0]
+:ufw-not-local - [0:0]
+# End required lines
+
+
+# allow all on loopback
+-A ufw-before-input -i lo -j ACCEPT
+-A ufw-before-output -o lo -j ACCEPT
+
+# quickly process packets for which we already have a connection
+-A ufw-before-input -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-output -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-forward -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# drop INVALID packets (logs these in loglevel medium and higher)
+-A ufw-before-input -m conntrack --ctstate INVALID -j ufw-logging-deny
+-A ufw-before-input -m conntrack --ctstate INVALID -j DROP
+
+# ok icmp codes for INPUT
+-A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type echo-request -j ACCEPT
+
+# ok icmp code for FORWARD
+-A ufw-before-forward -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type echo-request -j ACCEPT
+
+# allow dhcp client to work
+-A ufw-before-input -p udp --sport 67 --dport 68 -j ACCEPT
+
+#
+# ufw-not-local
+#
+-A ufw-before-input -j ufw-not-local
+
+# if LOCAL, RETURN
+-A ufw-not-local -m addrtype --dst-type LOCAL -j RETURN
+
+# if MULTICAST, RETURN
+-A ufw-not-local -m addrtype --dst-type MULTICAST -j RETURN
+
+"before.rules" 77L, 2668C                                                                     1,1           Top
+#
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+#
+# rules.before
+#
+# Rules that should be run before the ufw command line added rules. Custom
+# rules should be added to one of these chains:
+#   ufw-before-input
+#   ufw-before-output
+#   ufw-before-forward
+#
+
+# Don't delete these required lines, otherwise there will be errors
+*filter
+:ufw-before-input - [0:0]
+:ufw-before-output - [0:0]
+:ufw-before-forward - [0:0]
+:ufw-not-local - [0:0]
+# End required lines
+
+
+# allow all on loopback
+-A ufw-before-input -i lo -j ACCEPT
+-A ufw-before-output -o lo -j ACCEPT
+
+# quickly process packets for which we already have a connection
+-A ufw-before-input -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-output -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-forward -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# drop INVALID packets (logs these in loglevel medium and higher)
+-A ufw-before-input -m conntrack --ctstate INVALID -j ufw-logging-deny
+-A ufw-before-input -m conntrack --ctstate INVALID -j DROP
+
+# ok icmp codes for INPUT
+-A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type echo-request -j ACCEPT
+
+# ok icmp code for FORWARD
+-A ufw-before-forward -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type echo-request -j ACCEPT
+
+# allow dhcp client to work
+-A ufw-before-input -p udp --sport 67 --dport 68 -j ACCEPT
+
+#
+# ufw-not-local
+#
+-A ufw-before-input -j ufw-not-local
+
+# if LOCAL, RETURN
+-A ufw-not-local -m addrtype --dst-type LOCAL -j RETURN
+
+# if MULTICAST, RETURN
+-A ufw-not-local -m addrtype --dst-type MULTICAST -j RETURN
+
+"before.rules" 77L, 2668C                                                                     1,1           Top
+#
+ERROR: problem running ufw-init
+iptables-restore v1.6.0: Can't set policy `ACCEPT' on `PREROUTEING' line 11: Bad built-in chain name
+
+
+Problem running '/etc/ufw/before.rules'
+
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw disable
+Firewall stopped and disabled on system startup
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw status
+Status: inactive
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ vim
+after6.rules    after.rules     before6.rules   before.rules    ufw.conf        user.rules
+after.init      applications.d/ before.init     sysctl.conf     user6.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ vim before
+before6.rules  before.init    before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ vim before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo vim before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+ERROR: problem running ufw-init
+Bad argument `COMMIT'
+Error occurred at line: 13
+#
+# rules.before
+#
+# Rules that should be run before the ufw command line added rules. Custom
+# rules should be added to one of these chains:
+#   ufw-before-input
+#   ufw-before-output
+#   ufw-before-forward
+#
+# Don't delete these required lines, otherwise there will be errors
+*filter
+:ufw-before-input - [0:0]
+:ufw-before-output - [0:0]
+:ufw-before-forward - [0:0]
+:ufw-not-local - [0:0]
+# End required lines
+
+
+# allow all on loopback
+-A ufw-before-input -i lo -j ACCEPT
+-A ufw-before-output -o lo -j ACCEPT
+
+# quickly process packets for which we already have a connection
+-A ufw-before-input -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-output -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-forward -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# drop INVALID packets (logs these in loglevel medium and higher)
+-A ufw-before-input -m conntrack --ctstate INVALID -j ufw-logging-deny
+-A ufw-before-input -m conntrack --ctstate INVALID -j DROP
+
+# ok icmp codes for INPUT
+-A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type echo-request -j ACCEPT
+
+# ok icmp code for FORWARD
+-A ufw-before-forward -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type echo-request -j ACCEPT
+
+# allow dhcp client to work
+-A ufw-before-input -p udp --sport 67 --dport 68 -j ACCEPT
+
+#
+# ufw-not-local
+#
+-A ufw-before-input -j ufw-not-local
+
+# if LOCAL, RETURN
+-A ufw-not-local -m addrtype --dst-type LOCAL -j RETURN
+
+# if MULTICAST, RETURN
+-A ufw-not-local -m addrtype --dst-type MULTICAST -j RETURN
+
+# if BROADCAST, RETURN
+"before.rules" 76L, 2667C                                                                     1,1           Top
+#
+Try `iptables-restore -h' or 'iptables-restore --help' for more information.
+
+Problem running '/etc/ufw/before.rules'
+
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo vim before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw disable
+Firewall stopped and disabled on system startup
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+ERROR: problem running ufw-init
+Bad argument `COMMIT'
+#
+# /etc/sysctl.conf - Configuration file for setting system variables
+# See /etc/sysctl.d/ for additional system variables.
+# See sysctl.conf (5) for information.
+#
+
+#kernel.domainname = example.com
+
+# Uncomment the following to stop low-level messages on console
+#kernel.printk = 3 4 1 3
+
+##############################################################3
+# Functions previously found in netbase
+#
+
+# Uncomment the next two lines to enable Spoof protection (reverse-path filter)
+# Turn on Source Address Verification in all interfaces to
+# prevent some spoofing attacks
+#net.ipv4.conf.default.rp_filter=1
+#net.ipv4.conf.all.rp_filter=1
+
+# Uncomment the next line to enable TCP/IP SYN cookies
+# See http://lwn.net/Articles/277146/
+# Note: This may impact IPv6 TCP sessions too
+#net.ipv4.tcp_syncookies=1
+
+# Uncomment the next line to enable packet forwarding for IPv4
+#net.ipv4.ip_forward=1
+
+# Uncomment the next line to enable packet forwarding for IPv6
+#  Enabling this option disables Stateless Address Autoconfiguration
+#  based on Router Advertisements for this host
+#net.ipv6.conf.all.forwarding=1
+
+
+###################################################################
+# Additional settings - these settings can improve the network
+# security of the host and prevent against some network attacks
+# including spoofing attacks and man in the middle attacks through
+# redirection. Some network environments, however, require that these
+# settings are disabled so review and enable them as needed.
+#
+# Do not accept ICMP redirects (prevent MITM attacks)
+#net.ipv4.conf.all.accept_redirects = 0
+#net.ipv6.conf.all.accept_redirects = 0
+# _or_
+# Accept ICMP redirects only for gateways listed in our default
+# gateway list (enabled by default)
+# net.ipv4.conf.all.secure_redirects = 1
+#
+# Do not send ICMP redirects (we are not a router)
+#net.ipv4.conf.all.send_redirects = 0
+#
+# Do not accept IP source route packets (we are not a router)
+#net.ipv4.conf.all.accept_source_route = 0
+#net.ipv6.conf.all.accept_source_route = 0
+#
+# Log Martian Packets
+#net.ipv4.conf.all.log_martians = 1
+#
+"sysctl.conf" 60L, 2084C                                                                      1,1           All
+#
+# /etc/sysctl.conf - Configuration file for setting system variables
+Error occurred at line: 13
+Try `iptables-restore -h' or 'iptables-restore --help' for more information.
+
+Problem running '/etc/ufw/before.rules'
+
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo vim before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw disable
+Firewall stopped and disabled on system startup
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+ERROR: problem running ufw-init
+iptables-restore: line 14 failed
+
+Problem running '/etc/ufw/before.rules'
+
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo vim before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw disable
+Firewall stopped and disabled on system startup
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+ERROR: problem running ufw-init
+iptables-restore: line 10 failed
+
+Problem running '/etc/ufw/before.rules'
+
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo vim before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo vim before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw status
+Status: active
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW       Anywhere
+80/tcp                     ALLOW       Anywhere
+443/tcp                    ALLOW       Anywhere
+22/tcp (v6)                ALLOW       Anywhere (v6)
+80/tcp (v6)                ALLOW       Anywhere (v6)
+443/tcp (v6)               ALLOW       Anywhere (v6)
+
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw disable
+Firewall stopped and disabled on system startup
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw status
+Status: inactive
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw disable
+Firewall stopped and disabled on system startup
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo vim before.rules
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ sudo ufw enable
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+ERROR: problem running ufw-init
+Bad argument `COMMIT'
+Error occurred at line: 13
+Try `iptables-restore -h' or 'iptables-restore --help' for more information.
+
+Problem running '/etc/ufw/before.rules'
+
+ubuntu@gc-3118-web-01-1616627477:/etc/ufw$ cd ..
+ubuntu@gc-3118-web-01-1616627477:/etc$ sudo vi sysctl.conf
+ubuntu@gc-3118-web-01-1616627477:/etc$ sudo sysctl -p
+net.ipv4.ip_forward = 1
+ubuntu@gc-3118-web-01-1616627477:/etc$ sudo systemctl restart ufw
+ubuntu@gc-3118-web-01-1616627477:/etc$ sudo ufw status
+Status: active
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW       Anywhere
+80/tcp                     ALLOW       Anywhere
+443/tcp                    ALLOW       Anywhere
+22/tcp (v6)                ALLOW       Anywhere (v6)
+80/tcp (v6)                ALLOW       Anywhere (v6)
+443/tcp (v6)               ALLOW       Anywhere (v6)
+
+ubuntu@gc-3118-web-01-1616627477:/etc$ netstat -lpn
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:39791         0.0.0.0:*               LISTEN      -
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      -
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -
+tcp6       0      0 :::80                   :::*                    LISTEN      -
+tcp6       0      0 :::8080                 :::*                    LISTEN      -
+tcp6       0      0 :::22                   :::*                    LISTEN      -
+udp        0      0 172.17.0.1:123          0.0.0.0:*                           -
+udp        0      0 10.10.0.88:123          0.0.0.0:*                           -
+udp        0      0 127.0.0.1:123           0.0.0.0:*                           -
+udp        0      0 0.0.0.0:123             0.0.0.0:*                           -
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           -
+udp6       0      0 fe80::948f:78ff:fe6:123 :::*                                -
+udp6       0      0 fe80::42:b5ff:fe77::123 :::*                                -
+udp6       0      0 fe80::4001:aff:fe0a:123 :::*                                -
+udp6       0      0 ::1:123                 :::*                                -
+udp6       0      0 :::123                  :::*                                -
+Active UNIX domain sockets (only servers)
+Proto RefCnt Flags       Type       State         I-Node   PID/Program name    Path
+unix  2      [ ACC ]     STREAM     LISTENING     742042   -                   /var/run/docker.sock
+unix  2      [ ACC ]     STREAM     LISTENING     2472361  17770/systemd       /run/user/1000/systemd/private
+unix  2      [ ACC ]     SEQPACKET  LISTENING     11705    -                   /run/udev/control
+unix  2      [ ACC ]     STREAM     LISTENING     2472365  17770/systemd       /run/user/1000/snapd-session-agent.socket
+unix  2      [ ACC ]     STREAM     LISTENING     742291   -                   /var/run/docker/metrics.sock
+unix  2      [ ACC ]     STREAM     LISTENING     742466   -                   /run/docker/libnetwork/ef166a6066042e957851100ea95286c5cf7ae856b9fd1a387cfe3c7e14178bee.sock
+unix  2      [ ACC ]     STREAM     LISTENING     11689    -                   /run/systemd/private
+unix  2      [ ACC ]     STREAM     LISTENING     11699    -                   /run/lvm/lvmetad.socket
+unix  2      [ ACC ]     STREAM     LISTENING     11706    -                   /run/systemd/journal/stdout
+unix  2      [ ACC ]     STREAM     LISTENING     15841    -                   /var/lib/lxd/unix.socket
+unix  2      [ ACC ]     STREAM     LISTENING     12094    -                   /run/lvm/lvmpolld.socket
+unix  2      [ ACC ]     STREAM     LISTENING     1000428  -                   /run/containerd/s/8def65303e928da89a52b5d5ae1b9e77a24265dc870fe4ad6bc6294946141057
+unix  2      [ ACC ]     STREAM     LISTENING     15833    -                   /var/run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     15837    -                   /run/snapd.socket
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+"defautl" [New File]                                                                          0,0-1         All
+
+unix  2      [ ACC ]     STREAM     LISTENING     15838    -                   /run/snapd-snap.socket
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+"defaudefault" [New File]                                                                     0,0-1         All
+unix  2      [ ACC ]     STREAM     LISTENING     15839    -                   /run/uuidd/request
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+# Default server configuration
+#
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        # SSL configuration
+        #
+        # listen 443 ssl default_server;
+        # listen [::]:443 ssl default_server;
+        #
+        # Note: You should disable gzip for SSL traffic.
+        # See: https://bugs.debian.org/773332
+        #
+        # Read up on ssl_ciphers to ensure a secure configuration.
+        # See: https://bugs.debian.org/765782
+        #
+        # Self signed certs generated by the ssl-cert package
+        # Don't use them in a production server!
+        #
+        # include snippets/snakeoil.conf;
+        root /var/www/html;
+        server_name thefutureisai.tech;
+
+        location / {
+        add_header X-Served-By $HOSTNAME;
+}
+
+        # Adr index.php to the list if you are using PHP
+        error_page 404 /ERROR404.html;
+        location /ERROR404.html {
+                root /usr/share/nginx/html;
+                internal;
+        }
+        index index.html index.htm index.nginx-debian.html;
+
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        #location ~ \.php$ {
+        #       include snippets/fastcgi-php.conf;
+        #
+        #       # With php7.0-cgi alone:
+        #       fastcgi_pass 127.0.0.1:9000;
+        #       # With php7.0-fpm:
+        #       fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        #}
+"default" 88L, 2128C                                                                          1,1           Top
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+# Default server configuration
+#
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        # SSL configuration
+        #
+        # listen 443 ssl default_server;
+        # listen [::]:443 ssl default_server;
+        #
+        # Note: You should disable gzip for SSL traffic.
+        # See: https://bugs.debian.org/773332
+        #
+        # Read up on ssl_ciphers to ensure a secure configuration.
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+# Default server configuration
+#
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        # SSL configuration
+        #
+        # listen 443 ssl default_server;
+        # listen [::]:443 ssl default_server;
+        #
+        # Note: You should disable gzip for SSL traffic.
+        # See: https://bugs.debian.org/773332
+        #
+        # Read up on ssl_ciphers to ensure a secure configuration.
+dddddddd##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+# Default server configuration
+#
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        # SSL configuration
+        #
+        # listen 443 ssl default_server;
+        # listen [::]:443 ssl default_server;
+        #
+        # Note: You should disable gzip for SSL traffic.
+        # See: https://bugs.debian.org/773332
+        #
+        # Read up on ssl_ciphers to ensure a secure configuration.
+        # See: https://bugs.debian.org/765782
+        #
+        # Self signed certs generated by the ssl-cert package
+        # Don't use them in a production server!
+        #
+        # include snippets/snakeoil.conf;
+        root /var/www/html;
+        server_name thefutureisai.tech;
+
+        location / {
+        add_header X-Served-By $HOSTNAME;
+}
+
+        # Adr index.php to the list if you are using PHP
+        error_page 404 /ERROR404.html;
+        location /ERROR404.html {
+                root /usr/share/nginx/html;
+                internal;
+        }
+        index index.html index.htm index.nginx-debian.html;
+
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        #location ~ \.php$ {
+        #       include snippets/fastcgi-php.conf;
+        #
+        #       # With php7.0-cgi alone:
+        #       fastcgi_pass 127.0.0.1:9000;
+        #       # With php7.0-fpm:
+        #       fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        #}
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #       deny all;
+        #}
+}
+
+
+# Virtual Host configuration for example.com
+#
+# You can move that to a different file under sites-available/ and symlink that
+# to sites-enabled/ to enable it.
+#
+#server {
+#       listen 80;
+#       listen [::]:80;
+#
+#       server_name example.com;
+#
+#       root /var/www/example.com;
+#       index index.html;
+#
+#       location / {
+#               try_files $uri $uri/ =404;
+#       }
+        index index.html index.htm index.nginx-debian.html;
+unix  2      [ ACC ]     STREAM     LISTENING     16012    -                   @ISCSIADM_ABSTRACT_NAMESPACE
+unix  2      [ ACC ]     STREAM     LISTENING     15840    -                   /run/acpid.socket
+unix  2      [ ACC ]     STREAM     LISTENING     741884   -                   /run/containerd/containerd.sock
+ubuntu@gc-3118-web-01-1616627477:/etc$ grep listen /etc/nginx/sites-enabled/default
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	# listen 443 ssl default_server;
+	# listen [::]:443 ssl default_server;
+	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+#	listen 80;
+#	listen [::]:80;
+ubuntu@gc-3118-web-01-1616627477:/etc$ ls
+NetworkManager                 dhcp             ld.so.cache     os-release               selinux
+X11                            dnsmasq.d        ld.so.conf      overlayroot.conf         services
+acpi                           docker           ld.so.conf.d    overlayroot.local.conf   sgml
+adduser.conf                   dpkg             ldap            pam.conf                 shadow
+alternatives                   ec2_version      legal           pam.d                    shadow-
+apache2                        environment      libaudit.conf   passwd                   shells
+apm                            fonts            lighttpd        passwd-                  skel
+apparmor                       fstab            locale.alias    perl                     sos.conf
+apparmor.d                     fuse.conf        locale.gen      pm                       ssh
+apport                         gai.conf         localtime       polkit-1                 sshguard
+apt                            groff            logcheck        pollinate                ssl
+at.deny                        group            login.defs      popularity-contest.conf  subgid
+bash.bashrc                    group-           logrotate.conf  ppp                      subgid-
+bash_completion                grub.d           logrotate.d     profile                  subuid
+bash_completion.d              gshadow          lsb-release     profile.d                subuid-
+bindresvport.blacklist         gshadow-         ltrace.conf     protocols                sudoers
+binfmt.d                       gss              lvm             python                   sudoers.d
+boto.cfg                       haproxy          machine-id      python2.7                sysctl.conf
+byobu                          hdparm.conf      magic           python3                  sysctl.d
+ca-certificates                host.conf        magic.mime      python3.5                systemd
+ca-certificates.conf           hostname         mailcap         rc.local                 terminfo
+ca-certificates.conf.dpkg-old  hosts            mailcap.order   rc0.d                    timezone
+calendar                       hosts.allow      manpath.config  rc1.d                    tmpfiles.d
+cloud                          hosts.deny       mdadm           rc2.d                    ucf.conf
+console-setup                  init             mime.types      rc3.d                    udev
+cron.d                         init.d           mke2fs.conf     rc4.d                    ufw
+cron.daily                     initramfs-tools  modprobe.d      rc5.d                    update-manager
+cron.hourly                    inputrc          modules         rc6.d                    update-motd.d
+cron.monthly                   insserv          modules-load.d  rcS.d                    update-notifier
+cron.weekly                    insserv.conf     mtab            resolv.conf              updatedb.conf
+crontab                        insserv.conf.d   nanorc          resolvconf               vim
+crypttab                       iproute2         network         rmt                      vmware-tools
+dbus-1                         iscsi            networks        rpc                      vtrgb
+debconf.conf                   issue            newt            rsyslog.conf             wgetrc
+debian_version                 issue.net        nginx           rsyslog.d                xdg
+default                        kbd              nsswitch.conf   screenrc                 xml
+deluser.conf                   kernel           ntp.conf        securetty                zsh_command_not_found
+depmod.d                       kernel-img.conf  opt             security
+ubuntu@gc-3118-web-01-1616627477:/etc$ cd nginx/
+ubuntu@gc-3118-web-01-1616627477:/etc/nginx$ ls
+conf.d        fastcgi_params  koi-win     nginx.conf    scgi_params      sites-enabled  uwsgi_params
+fastcgi.conf  koi-utf         mime.types  proxy_params  sites-available  snippets       win-utf
+ubuntu@gc-3118-web-01-1616627477:/etc/nginx$ cd sites-available/
+ubuntu@gc-3118-web-01-1616627477:/etc/nginx/sites-available$ ls
+default
+ubuntu@gc-3118-web-01-1616627477:/etc/nginx/sites-available$ sudo vim defautl
+ubuntu@gc-3118-web-01-1616627477:/etc/nginx/sites-available$ sudo vim defaudefault
+ubuntu@gc-3118-web-01-1616627477:/etc/nginx/sites-available$ sudo vim default
+ubuntu@gc-3118-web-01-1616627477:/etc/nginx/sites-available$ sudo service nginx restart
+Job for nginx.service failed because the control process exited with error code. See "systemctl status nginx.service" and "journalctl -xe" for details.
+ubuntu@gc-3118-web-01-1616627477:/etc/nginx/sites-available$ sudo nginx -t
+nginx: [emerg] unknown directive "u" in /etc/nginx/sites-enabled/default:16
+nginx: configuration file /etc/nginx/nginx.conf test failed
+ubuntu@gc-3118-web-01-1616627477:/etc/nginx/sites-available$ sudo apt-get remove nginx
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  grub-pc-bin
+Use 'sudo apt autoremove' to remove it.
+The following packages will be REMOVED:
+  nginx
+0 upgraded, 0 newly installed, 1 to remove and 56 not upgraded.
+After this operation, 38.9 kB disk space will be freed.
+Do you want to continue? [Y/n] y
+perl: warning: Setting locale failed.
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+"before.rule" [New File]                                                                      0,0-1         All
+perl: warning: Please check that your locale settings:
+#
+# rules.before
+#
+# Rules that should be run before the ufw command line added rules. Custom
+# rules should be added to one of these chains:
+#   ufw-before-input
+#   ufw-before-output
+#   ufw-before-forward
+#
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+COMMIT
+# Don't delete these required lines, otherwise there will be errors
+*filter
+:ufw-before-input - [0:0]
+:ufw-before-output - [0:0]
+:ufw-before-forward - [0:0]
+:ufw-not-local - [0:0]
+# End required lines
+
+
+# allow all on loopback
+-A ufw-before-input -i lo -j ACCEPT
+-A ufw-before-output -o lo -j ACCEPT
+
+# quickly process packets for which we already have a connection
+-A ufw-before-input -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-output -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-forward -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# drop INVALID packets (logs these in loglevel medium and higher)
+-A ufw-before-input -m conntrack --ctstate INVALID -j ufw-logging-deny
+-A ufw-before-input -m conntrack --ctstate INVALID -j DROP
+
+# ok icmp codes for INPUT
+-A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type echo-request -j ACCEPT
+
+# ok icmp code for FORWARD
+-A ufw-before-forward -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type echo-request -j ACCEPT
+
+# allow dhcp client to work
+-A ufw-before-input -p udp --sport 67 --dport 68 -j ACCEPT
+
+#
+# ufw-not-local
+#
+-A ufw-before-input -j ufw-not-local
+
+# if LOCAL, RETURN
+-A ufw-not-local -m addrtype --dst-type LOCAL -j RETURN
+
+"before.rules" 80L, 2763C                                                                     1,1           Top
+#
+# rules.before
+#
+# Rules that should be run before the ufw command line added rules. Custom
+# rules should be added to one of these chains:
+#   ufw-before-input
+#   ufw-before-output
+#   ufw-before-forward
+#
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+COMMIT
+# Don't delete these required lines, otherwise there will be errors
+*filter
+:ufw-before-input - [0:0]
+:ufw-before-output - [0:0]
+:ufw-before-forward - [0:0]
+:ufw-not-local - [0:0]
+# End required lines
+
+
+# allow all on loopback
+-A ufw-before-input -i lo -j ACCEPT
+-A ufw-before-output -o lo -j ACCEPT
+
+# quickly process packets for which we already have a connection
+-A ufw-before-input -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-output -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A ufw-before-forward -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# drop INVALID packets (logs these in loglevel medium and higher)
+-A ufw-before-input -m conntrack --ctstate INVALID -j ufw-logging-deny
+-A ufw-before-input -m conntrack --ctstate INVALID -j DROP
+
+# ok icmp codes for INPUT
+-A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-input -p icmp --icmp-type echo-request -j ACCEPT
+
+# ok icmp code for FORWARD
+-A ufw-before-forward -p icmp --icmp-type destination-unreachable -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type source-quench -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type time-exceeded -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type parameter-problem -j ACCEPT
+-A ufw-before-forward -p icmp --icmp-type echo-request -j ACCEPT
+
+# allow dhcp client to work
+-A ufw-before-input -p udp --sport 67 --dport 68 -j ACCEPT
+
+#
+# ufw-not-local
+#
+-A ufw-before-input -j ufw-not-local
+
+# if LOCAL, RETURN
+-A ufw-not-local -m addrtype --dst-type LOCAL -j RETURN
+
+# if MULTICAST, RETURN
+-A ufw-not-local -m addrtype --dst-type MULTICAST -j RETURN
+
+# if BROADCAST, RETURN
+-A ufw-not-local -m addrtype --dst-type BROADCAST -j RETURN
+
+# all other non-local packets are dropped
+-A ufw-not-local -m limit --limit 3/min --limit-burst 10 -j ufw-logging-deny
+-A ufw-not-local -j DROP
+
+# allow MULTICAST mDNS for service discovery (be sure the MULTICAST line above
+# is uncommented)
+-A ufw-before-input -p udp -d 224.0.0.251 --dport 5353 -j ACCEPT
+
+# allow MULTICAST UPnP for service discovery (be sure the MULTICAST line above
+# is uncommented)
+-A ufw-before-input -p udp -d 239.255.255.250 --dport 1900 -j ACCEPT
+
+# don't delete the 'COMMIT' line or these rules won't be processed
+COMMIT
