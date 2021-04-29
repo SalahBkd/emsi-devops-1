@@ -1,2 +1,5 @@
+sudo ufw enable
 sudo ufw default deny incoming 
-sudo ufw allow from any to any port 22,80,443 proto tcp
+sudo ufw allow from any to any port 22 proto tcp
+sudo ufw allow from any to any port 80 proto tcp
+sudo ufw allow from any to any port 443 proto tcp
