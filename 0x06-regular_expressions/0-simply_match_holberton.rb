@@ -1,2 +1,5 @@
-#!/usr/bin/env ruby 
-puts ARGV[0].scan(/127.0.0.[0-9]/).join
+#!/usr/bin/env ruby
+#Match exactly Holberton
+
+puts ARGV[0].scan(/Holberton/).join
+
