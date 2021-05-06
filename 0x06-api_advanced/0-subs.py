@@ -9,6 +9,7 @@ def number_of_subscribers(subreddit):
 	headers.update({'User-Agent': 'me'})
 	response = requests.get(url, headers=headers).json()
 	subs = response.get('data', {}).get('subscribers')
-	if subs : 
-		return subs 
-	return 0  
+	if not subs : 
+		return 0 
+	return subs
+ 
