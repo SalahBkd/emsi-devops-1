@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """
-0-subs : using reddit api to get number of subs for a specific subreddit
+Query Reddit API for number of subscribers for a given subreddit
 """
 import requests
 
 
 def number_of_subscribers(subreddit):
+<<<<<<< HEAD
     """ 
     function to get the number of subs
     """
