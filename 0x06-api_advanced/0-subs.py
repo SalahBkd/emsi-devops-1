@@ -6,7 +6,6 @@ import requests
 
 
 def number_of_subscribers(subreddit):
-<<<<<<< HEAD
     """ 
     function to get the number of subs
     """
