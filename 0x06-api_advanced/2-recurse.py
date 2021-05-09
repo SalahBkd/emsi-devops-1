@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-import requests 
 """
-return the list of all hot posts of a subreddit 
+return the list of all hot posts of a subreddit
 """
+import requests
 def recurse(subreddit, hot_list=[], count=0):
     """
-    the recurse function is recursive function that returs the title of all hot posts in subreddit 
+    the recurse function is recursive function that returs the title of all hot posts in subreddit
     """
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = requests.utils.default_headers()
