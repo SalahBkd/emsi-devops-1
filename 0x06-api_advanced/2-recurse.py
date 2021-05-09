@@ -23,9 +23,10 @@ def recurse(subreddit, hot_list=[], after="done"):
     # adding the newly added top posts 
     sub_titles = response.json().get('data', {}).get('children', [])
     if not sub_titles:
-        return hot_list
-    for i in sub_titles:
-        hot_list.append(i.get('data').get('title'))
+        return None
+    else:
+        for i in sub_titles:
+            hot_list.append(i.get('data').get('title'))
 
     # new value after
     after = response.json().get('data').get('after')
