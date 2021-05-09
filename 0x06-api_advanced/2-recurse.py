@@ -18,7 +18,7 @@ def recurse(subreddit, hot_list=[], after="done"):
     response = requests.get(url, headers=headers, allow_redirects=False)
     sub_titles=response.json().get('data', {}).get('children', [])
     if not sub_titles:
-        return hot_list
+        return None
     else :
         # adding all the current fetched titles
         for i in sub_titles:
