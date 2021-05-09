@@ -34,12 +34,10 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 frontend wwwfront
-        bind *:80
         bind *:443 ssl crt /etc/ssl/thefutureisai/thefutureisai.pem
-        mode http
+        reqadd X-Forwarded-Proto:\ https
         default_backend wwwback
 backend wwwback
-        mode http
-        option forwardfor
+        balance  roundrobin
+        redirect scheme https if !{ ssl_fc }
         server 3118-lb-01 35.196.174.241:80 check
-        option httpchk
