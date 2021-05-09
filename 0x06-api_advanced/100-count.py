@@ -1,36 +1,45 @@
 #!/usr/bin/python3
-
+import requests 
 """
-Task 2, all the hot post
+return the list of all hot posts of a subreddit & counts reps
 """
-import requests
 
 
-def count_words(subreddit, word_list, after=None, count={}):
+def count_words(subreddit, word_list,after="done", count={}):
     """
-       print 100 top posts
+       recursive function that returs the title
+       counts
     """
-    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
-    response = requests.get(url, headers={"User-Agent": "oussama99"},
-                        allow_redirects=False,
-                        params={'after': after})
-    if after is None:
-        for word in word_list:
-            count[word] = 0
-
-    if response.status_code == 200:
-        after = response.json()['data']['after']
-        if after is None:
-            for word, value in count.items():
-                if value != 0:
-                    print('{}: {}'.format(word, value))
-            return
-
-        for post in response.json()['data']['children']:
-            for word in word_list:
-                string = post['data']['title']
-                string_split = string.lower().split(' ')
-                count[word] += string_split.count(word.lower())
-        return count_words(subreddit, word_list, after, count)
-    else:
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    # turning the string into list
+    
+    if after != "done":
+        url = url + "?after={}".format(after)
+    #if not count:
+    string=word_list.split(' ')
+    if not count:
+        for word in string:
+            count[word]=0
+    headers = requests.utils.default_headers()
+    headers.update({'User-Agent':'me'})
+    response = requests.get(url, headers=headers, allow_redirects=False)
+    sub_titles=response.json().get('data', {}).get('children', [])
+    
+    if not sub_titles:
+        return None
+    else :
+        # adding all the current fetched titles
+        for i in sub_titles:
+            for word in count.keys():
+                new=i.get('data').get('title')
+                count[word]+=new.count(word)
+            if new.count(word)!=0:
+                print ('===>',new.count(word))
+    after = response.json().get('data').get('after')
+    if not after:
+        print(count)
+        for word, value in count.items():
+            print('{}:{}'.format(word,value))
         return
+    else:
+        return count_words(subreddit,word_list,after,count)
