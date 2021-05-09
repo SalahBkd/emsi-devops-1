@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """
-1-top_ten getting top 10 hot posts
+Getting the top 10 hot posts of a subreddit
 """
 import requests
 
 
 def top_ten(subreddit):
     """
-        printing the top hot posts of a subreddit.
+        function prints the top hot posts of a subreddit
+        and returns None if the subreddit is not valid
     """
     # setting user agent
     headers = requests.utils.default_headers()
