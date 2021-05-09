@@ -1,30 +1,35 @@
 #!/usr/bin/python3
-
 """
-Recursive function to get hot posts
+Return the list of all hot posts of a subreddit
 """
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=None):
+def recurse(subreddit, hot_list=[], after="done"):
     """
         thi is a recursive function
         returns all hot posts
     """
+    # seeting user agent
+    headers = requests.utils.default_headers()
+    headers.update({'User-Agent': 'My User Agent 1.0'})
 
-    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
-    response = requests.get(url, headers={"User-Agent": "oussama9"},
-                        allow_redirects=False,
-                        params={'after': after})
+    # alter url with the new value of after
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    if after != "done":
+        url = url + "?after={}".format(after)
+    response = requests.get(url, headers=headers, allow_redirects=False)
 
-    if response.status_code == 200:
-        after = response.json()['data']['after']
-        if after is None:
-            return hot_list
-
-        for post in response.json()['data']['children']:
-            hot_list.append(post['data']['title'])
-        return recurse(subreddit, hot_list, after)
-
-    else:
+    # adding the newly added top posts
+    sub_titles = response.json().get('data', {}).get('children', [])
+    if not sub_titles:
         return None
+    else:
+        for i in sub_titles:
+            hot_list.append(i.get('data').get('title'))
+
+    # new value after
+    after = response.json().get('data').get('after')
+    if not after:
+        return hot_list
+    return (recurse(subreddit, hot_list, after))
